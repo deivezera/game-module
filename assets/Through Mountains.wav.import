@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://csh0lo747nsvg"
+path="res://.godot/imported/Through Mountains.wav-84af7b5ec6cef1756c002fa6f3abc793.sample"
+
+[deps]
+
+source_file="res://assets/Through Mountains.wav"
+dest_files=["res://.godot/imported/Through Mountains.wav-84af7b5ec6cef1756c002fa6f3abc793.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

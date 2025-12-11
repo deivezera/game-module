@@ -1,0 +1,96 @@
+[gd_scene load_steps=15 format=3 uid="uid://ce5rs6cokql3e"]
+
+[ext_resource type="Script" path="res://scripts/Game.gd" id="1_game"]
+[ext_resource type="PackedScene" uid="uid://c4wil0lcwhh7x" path="res://scenes/Player.tscn" id="2_player"]
+[ext_resource type="Texture2D" uid="uid://cbxmft55k3lp6" path="res://assets/floor.png" id="3_3n3ha"]
+[ext_resource type="Script" path="res://scripts/ObstacleSpawner.gd" id="3_spawner"]
+[ext_resource type="PackedScene" uid="uid://cgwc44udhjj4m" path="res://scenes/UI.tscn" id="5_ui"]
+[ext_resource type="Texture2D" uid="uid://d1fl5hgrfqwmu" path="res://assets/BG-sky.png" id="6_exc8o"]
+[ext_resource type="Texture2D" uid="uid://3y0smqctygow" path="res://assets/BG-mountains.png" id="7_ms628"]
+[ext_resource type="Texture2D" uid="uid://dqb3qv7178pxp" path="res://assets/BG-ruins.png" id="8_pgnj2"]
+[ext_resource type="Texture2D" uid="uid://bv0uoxyn8eg0n" path="res://assets/BG-sun.png" id="9_a24ps"]
+[ext_resource type="Script" path="res://scripts/Obstacle.gd" id="10_8kyyw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3br1u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(2557.5, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(64, 64)
+
+[sub_resource type="PackedScene" id="PackedScene_maysf"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("Obstacle", "Node2D", "script", "Sprite2D", "Sprite2D", "CollisionShape2D", "CollisionShape2D", "shape"),
+"node_count": 3,
+"node_paths": [NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 1, 2, 0, 0, 1073741824, 0, 4, 3, -1, 0, 0, 1073741825, 0, 6, 5, -1, 1, 7, 1, 0),
+"variants": [ExtResource("10_8kyyw"), SubResource("RectangleShape2D_1")],
+"version": 3
+}
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="Bg" type="ParallaxBackground" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Bg"]
+scale = Vector2(4.99609, 2.79687)
+texture = ExtResource("6_exc8o")
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Bg"]
+motion_scale = Vector2(0.6, 1)
+motion_mirroring = Vector2(1278, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bg/ParallaxLayer"]
+scale = Vector2(4.99219, 2.80859)
+texture = ExtResource("7_ms628")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Bg"]
+motion_scale = Vector2(0.7, 1)
+motion_mirroring = Vector2(1278, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bg/ParallaxLayer2"]
+scale = Vector2(4.992, 2.809)
+texture = ExtResource("8_pgnj2")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="Bg"]
+motion_scale = Vector2(0.8, 1)
+motion_mirroring = Vector2(1278, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bg/ParallaxLayer3"]
+scale = Vector2(4.99219, 4.26829)
+texture = ExtResource("9_a24ps")
+centered = false
+
+[node name="UI" parent="." instance=ExtResource("5_ui")]
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(150, 570)
+scale = Vector2(2, 2)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(600, 600)
+physics_material_override = SubResource("PhysicsMaterial_3br1u")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+position = Vector2(677.5, 72.997)
+scale = Vector2(2.09614, 1.73065)
+texture = ExtResource("3_3n3ha")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(678.25, 74)
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="ObstacleSpawner" type="Node" parent="."]
+script = ExtResource("3_spawner")
+obstacle_scene = SubResource("PackedScene_maysf")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)

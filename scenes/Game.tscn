@@ -1,0 +1,92 @@
+[gd_scene load_steps=14 format=3 uid="uid://ce5rs6cokql3e"]
+
+[ext_resource type="Script" path="res://scripts/Game.gd" id="1_game"]
+[ext_resource type="PackedScene" uid="uid://c4wil0lcwhh7x" path="res://scenes/Player.tscn" id="2_player"]
+[ext_resource type="Texture2D" uid="uid://cbxmft55k3lp6" path="res://assets/floor.png" id="3_3n3ha"]
+[ext_resource type="Script" path="res://scripts/ObstacleSpawner.gd" id="3_spawner"]
+[ext_resource type="PackedScene" uid="uid://cgwc44udhjj4m" path="res://scenes/UI.tscn" id="5_ui"]
+[ext_resource type="Texture2D" uid="uid://d1fl5hgrfqwmu" path="res://assets/BG-sky.png" id="6_exc8o"]
+[ext_resource type="Texture2D" uid="uid://3y0smqctygow" path="res://assets/BG-mountains.png" id="7_ms628"]
+[ext_resource type="Texture2D" uid="uid://dqb3qv7178pxp" path="res://assets/BG-ruins.png" id="8_pgnj2"]
+[ext_resource type="Texture2D" uid="uid://bv0uoxyn8eg0n" path="res://assets/BG-sun.png" id="9_a24ps"]
+[ext_resource type="PackedScene" uid="uid://pgdirggi788s" path="res://scenes/GameOver.tscn" id="10_rtafi"]
+[ext_resource type="AudioStream" uid="uid://csh0lo747nsvg" path="res://assets/Through Mountains.wav" id="11_e8h0x"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3br1u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(2560, 90)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="Bg" type="ParallaxBackground" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Bg"]
+scale = Vector2(5, 2.797)
+texture = ExtResource("6_exc8o")
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Bg"]
+motion_scale = Vector2(0.6, 1)
+motion_mirroring = Vector2(1278, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bg/ParallaxLayer"]
+scale = Vector2(5, 2.80859)
+texture = ExtResource("7_ms628")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Bg"]
+motion_scale = Vector2(0.7, 1)
+motion_mirroring = Vector2(1278, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bg/ParallaxLayer2"]
+scale = Vector2(5, 2.809)
+texture = ExtResource("8_pgnj2")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="Bg"]
+motion_scale = Vector2(0.001, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bg/ParallaxLayer3"]
+position = Vector2(1074, 1)
+scale = Vector2(4.99219, 4.26829)
+texture = ExtResource("9_a24ps")
+centered = false
+
+[node name="UI" parent="." instance=ExtResource("5_ui")]
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(152, 573)
+scale = Vector2(2, 2)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(600, 600)
+physics_material_override = SubResource("PhysicsMaterial_3br1u")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+position = Vector2(39.5, 75)
+scale = Vector2(1.05094, 1.73077)
+texture = ExtResource("3_3n3ha")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Ground"]
+position = Vector2(1318.5, 75)
+scale = Vector2(1.0493, 1.73077)
+texture = ExtResource("3_3n3ha")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(679, 75)
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="ObstacleSpawner" type="Node" parent="."]
+script = ExtResource("3_spawner")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="GameOver" parent="." instance=ExtResource("10_rtafi")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_e8h0x")
+volume_db = -15.526
+autoplay = true

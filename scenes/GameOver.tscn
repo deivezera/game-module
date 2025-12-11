@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://pgdirggi788s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jqyuc"]
+bg_color = Color(0.142961, 0.464342, 0.250595, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmwd0"]
+bg_color = Color(0.360784, 0.686275, 0.364706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8u04h"]
+bg_color = Color(0.362476, 0.688105, 0.364437, 1)
+
+[node name="GameOver" type="CanvasLayer"]
+process_mode = 2
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -33.0
+offset_right = 125.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 42
+theme_override_styles/hover = SubResource("StyleBoxFlat_jqyuc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pmwd0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8u04h")
+text = "Restart"
